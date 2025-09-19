@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .field-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #f9f9f9;
+            cursor: move;
+        }
+
+        .drag-over {
+            border: 2px dashed #007bff;
+            background: #e9f5ff;
+        }
+
+        .field-item input,
+        .field-item select {
+            margin: 4px 0;
+        }
+
+        .remove-btn {
+            background: red;
+            color: white;
+            padding: 2px 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .drag-handle {
+            background: #007bff;
+            color: white;
+            padding: 2px 6px;
+            margin-right: 10px;
+            cursor: grab;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create a Dynamic Form</h1>
+
+    <label>Form Name:</label>
+    <input type="text" id="form_name"><br><br>
+
+    <label>Description:</label>
+    <textarea id="form_description"></textarea><br><br>
+
+    <h3>Form Fields</h3>
+    <div id="fields-container"></div>
+
+    <button onclick="addField()">+ Add Field</button><br><br>
+    <button onclick="saveForm()">Save Form</button>
+
+    <script>
+        let fieldCount = 0;
+        let dragSrcEl = null;
+
+        function addField() {
+            fieldCount++;
+            const container = document.getElementById("fields-container");
+
+            const div = document.createElement("div");
+            div.className = "field-item";
+            div.setAttribute("data-id", fieldCount);
+            div.setAttribute("draggable", "true");
+
+            div.innerHTML = `
+                <span class="drag-handle">☰</span>
+                <label>Label:</label>
+                <input type="text" class="field-label"><br>
+                
+                <label>Type:</label>
+                <select class="field-type" onchange="toggleOptions(this)">
+                    <option value="text">Text</option>
+                    <option value="textarea">Textarea</option>
+                    <option value="number">Number</option>
+                    <option value="date">Date</option>
+                    <option value="email">Email</option>
+                    <option value="password">Password</option>
+                    <option value="select">Select</option>
+                    <option value="radio">Radio</option>
+                    <option value="checkbox">Checkbox</option>
+                </select><br>
+
+                <label>Required:</label>
+                <input type="checkbox" class="field-required" checked><br>
+
+                <label>Placeholder:</label>
+                <input type="text" class="field-placeholder"><br>
+
+                <label>Help Text:</label>
+                <input type="text" class="field-help"><br>
+
+                <div class="options-container" style="display:none;">
+                    <label>Options (comma separated):</label>
+                    <input type="text" class="field-options"><br>
+                </div>
+
+                <button class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+            `;
+
+            addDragAndDrop(div);
+
+            container.appendChild(div);
+        }
+
+        function toggleOptions(selectEl) {
+            const optionsContainer = selectEl.parentElement.querySelector(".options-container");
+            if (["select", "radio", "checkbox"].includes(selectEl.value)) {
+                optionsContainer.style.display = "block";
+            } else {
+                optionsContainer.style.display = "none";
+            }
+        }
+
+        async function saveForm() {
+            const formName = document.getElementById("form_name").value;
+            const formDescription = document.getElementById("form_description").value;
+
+            const fields = [];
+            document.querySelectorAll(".field-item").forEach((el, index) => {
+                fields.push({
+                    label: el.querySelector(".field-label").value,
+                    field_type: el.querySelector(".field-type").value,
+                    required: el.querySelector(".field-required").checked,
+                    placeholder: el.querySelector(".field-placeholder").value,
+                    help_text: el.querySelector(".field-help").value,
+                    options: (["select", "radio", "checkbox"].includes(el.querySelector(".field-type").value))
+                        ? el.querySelector(".field-options").value.split(",").map(opt => opt.trim())
+                        : null,
+                    order: index + 1
+                });
+            });
+
+            const response = await fetch("{% url 'save_form' %}", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    form_name: formName,
+                    form_description: formDescription,
+                    fields: fields
+                })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                window.location.href = data.redirect_url;
+            } else {
+                alert(data.error || "Error saving form");
+            }
+        }
+
+        function addDragAndDrop(el) {
+            el.addEventListener("dragstart", (e) => {
+                dragSrcEl = el;
+                e.dataTransfer.effectAllowed = "move";
+                e.dataTransfer.setData("text/html", el.innerHTML);
+                el.classList.add("dragging");
+            });
+
+            el.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = "move";
+                el.classList.add("drag-over");
+            });
+
+            el.addEventListener("dragleave", () => {
+                el.classList.remove("drag-over");
+            });
+
+            el.addEventListener("drop", (e) => {
+                e.preventDefault();
+                if (dragSrcEl !== el) {
+                    const container = document.getElementById("fields-container");
+                    if (Array.from(container.children).indexOf(dragSrcEl) <
+                        Array.from(container.children).indexOf(el)) {
+                        container.insertBefore(dragSrcEl, el.nextSibling);
+                    } else {
+                        container.insertBefore(dragSrcEl, el);
+                    }
+                }
+                el.classList.remove("drag-over");
+            });
+
+            el.addEventListener("dragend", () => {
+                el.classList.remove("dragging");
+            });
+        }
+    </script>
+</body>
+</html>

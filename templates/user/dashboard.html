@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome to Dashboard</h2>
+    <p>Hello, <strong>{{ user.username }}</strong> 👋</p>
+
+    <p>Email: {{ user.email }}</p>
+    {% if user.phone %}
+        <p>Phone: {{ user.phone }}</p>
+    {% endif %}
+
+    {% if user.profile_picture %}
+        <p><img src="{{ user.profile_picture.url }}" width="120"></p>
+    {% endif %}
+    
+    <a href="/accounts/profile/"><button>Go to Profile</button></a>  
+    <a href="/accounts/logout/">Logout</a>
+</body>
+</html>

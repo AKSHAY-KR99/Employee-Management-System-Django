@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ form.name }}</title>
+</head>
+<body>
+    <h1>{{ form.name }}</h1>
+    <p>{{ form.description }}</p>
+
+    <h3>Fields</h3>
+    <ul>
+        {% for field in fields %}
+            <li>
+                <strong>{{ field.label }}</strong> 
+                ({{ field.get_field_type_display }})
+                {% if field.required %} *{% endif %}
+                {% if field.placeholder %}<br>Placeholder: {{ field.placeholder }}{% endif %}
+                {% if field.help_text %}<br>Help: {{ field.help_text }}{% endif %}
+                {% if field.options %}
+                    <br>Options: {{ field.options|join:", " }}
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No fields added yet.</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'form_list' %}">⬅ Back to Form List</a></p>
+</body>
+</html>

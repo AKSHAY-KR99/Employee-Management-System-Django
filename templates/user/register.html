@@ -1,0 +1,36 @@
+<h2>Register</h2>
+<form id="registerForm" enctype="multipart/form-data">
+    <input type="text" name="username" placeholder="Username" required><br>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <input type="text" name="phone" placeholder="Phone"><br>
+    <input type="file" name="profile_picture"><br>
+    <button type="submit">Register</button>
+</form>
+
+<div id="message"></div>
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(document.getElementById("registerForm"));
+
+        try {
+            let response = await fetch("/accounts/register/", {
+                method: "POST",
+                body: formData
+            });
+
+            let result = await response.json();
+
+            if (result.success) {
+                document.getElementById("message").innerHTML = `<span style="color:green">${result.message}</span>`;
+            } else {
+                document.getElementById("message").innerHTML = `<span style="color:red">${result.error}</span>`;
+            }
+        } catch (err) {
+            document.getElementById("message").innerHTML = `<span style="color:red">Request failed</span>`;
+        }
+    });
+</script>

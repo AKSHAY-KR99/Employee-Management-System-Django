@@ -1,0 +1,65 @@
+<h2>My Profile</h2>
+
+<form id="profileForm" enctype="multipart/form-data">
+  <label>Username:</label>
+  <input type="text" name="username" value="{{ user.username }}" disabled><br>
+
+  <label>Email:</label>
+  <input type="email" name="email" value="{{ user.email }}" disabled><br>
+
+  <label>Phone:</label>
+  <input type="text" name="phone" value="{{ user.phone }}" disabled><br>
+
+  <label>Profile Picture:</label><br>
+  {% if user.profile_picture %}
+    <img src="{{ user.profile_picture.url }}" width="100"><br>
+  {% else %}
+    <p>No profile picture uploaded.</p>
+  {% endif %}
+  <input type="file" name="profile_picture" disabled><br><br>
+
+  <button type="button" id="editBtn">Edit</button>
+  <button type="submit" id="saveBtn" style="display:none;">Save</button>
+</form>
+
+<div id="message"></div>
+
+<br>
+<a href="/accounts/change-password/"><button>Change Password</button></a>
+<a href="/accounts/dashboard/"><button>Back to Dashboard</button></a>
+
+<script>
+const editBtn = document.getElementById("editBtn");
+const saveBtn = document.getElementById("saveBtn");
+const inputs = document.querySelectorAll("#profileForm input");
+
+editBtn.addEventListener("click", () => {
+    inputs.forEach(input => input.disabled = false);
+    editBtn.style.display = "none";
+    saveBtn.style.display = "inline";
+});
+
+document.getElementById("profileForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    let response = await fetch("/accounts/profile/", {
+        method: "POST",
+        body: formData,
+        credentials: "include"
+    });
+
+    let result = await response.json();
+
+    if (result.success) {
+        document.getElementById("message").innerHTML = `<span style="color:green">${result.message}</span>`;
+        // disable inputs again
+        inputs.forEach(input => input.disabled = true);
+        saveBtn.style.display = "none";
+        editBtn.style.display = "inline";
+    } else {
+        document.getElementById("message").innerHTML = `<span style="color:red">${result.error}</span>`;
+    }
+});
+</script>

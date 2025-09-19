@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form List</title>
+</head>
+<body>
+    <h1>All Created Forms</h1>
+    <a href="{% url 'form_builder' %}">+ Create New Form</a>
+    <ul>
+        {% for form in forms %}
+            <li>
+                <a href="{% url 'form_detail' form.id %}">
+                    <strong>{{ form.name }}</strong>
+                </a> - {{ form.description }}
+                <em>(Created: {{ form.created_at|date:"Y-m-d H:i" }})</em>
+            </li>
+        {% empty %}
+            <li>No forms created yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
