@@ -1,3 +1,7 @@
+{% load static %}
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static '/css/dashboard.css' %}">
+{% endblock %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,19 +9,36 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <h2>Welcome to Dashboard</h2>
-    <p>Hello, <strong>{{ user.username }}</strong> 👋</p>
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <h1>Welcome, {{ user.username }}</h1>
+        </div>
+        <div class="navbar-right">
+            <a href="/accounts/dashboard/" class="nav-btn">Dashboard</a>
+            <a href="/accounts/profile/" class="nav-btn">Profile</a>
+            <a href="/accounts/logout/" class="nav-btn logout">Logout</a>
+        </div>
+    </header>
 
-    <p>Email: {{ user.email }}</p>
-    {% if user.phone %}
-        <p>Phone: {{ user.phone }}</p>
-    {% endif %}
+    <!-- User Info -->
+    <section class="user-info">
+        <p>Email: {{ user.email }}</p>
+        {% if user.phone %}
+            <p>Phone: {{ user.phone }}</p>
+        {% endif %}
 
-    {% if user.profile_picture %}
-        <p><img src="{{ user.profile_picture.url }}" width="120"></p>
-    {% endif %}
-    
-    <a href="/accounts/profile/"><button>Go to Profile</button></a>  
-    <a href="/accounts/logout/">Logout</a>
+        {% if user.profile_picture %}
+            <p><img src="{{ user.profile_picture.url }}" width="120" class="profile-pic"></p>
+        {% endif %}
+    </section>
+
+    <!-- Dashboard Options -->
+    <main class="dashboard-options">
+        <a href="{% url 'form_builder' %}" class="option-card">Create New Form</a>
+        <a href="{% url 'form_list' %}" class="option-card">List All Forms</a>
+        <a href="{% url 'create_employee' %}" class="option-card">Add Employees</a>
+        <a href="{% url 'employee_list' %}" class="option-card">List Employees</a>
+    </main>
 </body>
 </html>

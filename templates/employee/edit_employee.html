@@ -1,62 +1,91 @@
-
+{% load static %}
 {% load custom_filters %}
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'css/employeeedit.css' %}">
+{% endblock %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Edit Employee</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        label { display: block; margin-top: 10px; }
-        input, select, textarea { width: 300px; margin-top: 5px; padding: 5px; }
-        button { margin-top: 15px; padding: 5px 15px; }
-    </style>
+
 </head>
 <body>
-    <h1>Edit Employee (Form: {{ form.name }})</h1>
+    <!-- Navbar -->
+    <header class="navbar">
+        <h2 class="logo">Employee Management</h2>
+        <nav>
+            <a href="/accounts/dashboard/">Dashboard</a>
+            <a href="/accounts/profile/">Profile</a>
+            <a href="/accounts/logout/">Logout</a>
+        </nav>
+    </header>
 
-    <form method="post">
-        {% csrf_token %}
-        {% for field in fields %}
-            <label>{{ field.label }} {% if field.required %}*{% endif %}</label>
+    <div class="container">
+        <h1>Edit Employee (Form: {{ form.name }})</h1>
 
-            {% if field.field_type == 'text' %}
-                <input type="text" name="field_{{ field.id }}" 
-                       value="{{ existing_values|get_item:field.id }}">
-            {% elif field.field_type == 'textarea' %}
-                <textarea name="field_{{ field.id }}">{{ existing_values|get_item:field.id }}</textarea>
-            {% elif field.field_type == 'number' %}
-                <input type="number" name="field_{{ field.id }}" value="{{ existing_values|get_item:field.id }}">
-            {% elif field.field_type == 'date' %}
-                <input type="date" name="field_{{ field.id }}" value="{{ existing_values|get_item:field.id }}">
-            {% elif field.field_type == 'email' %}
-                <input type="email" name="field_{{ field.id }}" value="{{ existing_values|get_item:field.id }}">
-            {% elif field.field_type == 'password' %}
-                <input type="password" name="field_{{ field.id }}" value="{{ existing_values|get_item:field.id }}">
-            {% elif field.field_type == 'select' %}
-                <select name="field_{{ field.id }}">
-                    {% for option in field.options %}
-                        <option value="{{ option }}" {% if existing_values|get_item:field.id == option %}selected{% endif %}>{{ option }}</option>
-                    {% endfor %}
-                </select>
-            {% elif field.field_type == 'radio' %}
-                {% for option in field.options %}
-                    <input type="radio" name="field_{{ field.id }}" value="{{ option }}" 
-                           {% if existing_values|get_item:field.id == option %}checked{% endif %}> {{ option }}
-                {% endfor %}
-            {% elif field.field_type == 'checkbox' %}
-                {% for option in field.options %}
-                    <input type="checkbox" name="field_{{ field.id }}" value="{{ option }}" 
-                           {% if option in existing_values|get_item:field.id|default:'' %}checked{% endif %}> {{ option }}
-                {% endfor %}
-            {% endif %}
+        <form method="post" class="edit-form">
+            {% csrf_token %}
+            {% for field in fields %}
+                <div class="form-group">
+                    <label>{{ field.label }} {% if field.required %}*{% endif %}</label>
 
-        {% endfor %}
+                    {% if field.field_type == 'text' %}
+                        <input type="text" name="field_{{ field.id }}" 
+                               value="{{ existing_values|get_item:field.id }}">
+                    {% elif field.field_type == 'textarea' %}
+                        <textarea name="field_{{ field.id }}">{{ existing_values|get_item:field.id }}</textarea>
+                    {% elif field.field_type == 'number' %}
+                        <input type="number" name="field_{{ field.id }}" 
+                               value="{{ existing_values|get_item:field.id }}">
+                    {% elif field.field_type == 'date' %}
+                        <input type="date" name="field_{{ field.id }}" 
+                               value="{{ existing_values|get_item:field.id }}">
+                    {% elif field.field_type == 'email' %}
+                        <input type="email" name="field_{{ field.id }}" 
+                               value="{{ existing_values|get_item:field.id }}">
+                    {% elif field.field_type == 'password' %}
+                        <input type="password" name="field_{{ field.id }}" 
+                               value="{{ existing_values|get_item:field.id }}">
+                    {% elif field.field_type == 'select' %}
+                        <select name="field_{{ field.id }}">
+                            {% for option in field.options %}
+                                <option value="{{ option }}" 
+                                    {% if existing_values|get_item:field.id == option %}selected{% endif %}>
+                                    {{ option }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    {% elif field.field_type == 'radio' %}
+                        <div class="options">
+                            {% for option in field.options %}
+                                <label>
+                                    <input type="radio" name="field_{{ field.id }}" value="{{ option }}"
+                                           {% if existing_values|get_item:field.id == option %}checked{% endif %}> 
+                                    {{ option }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                    {% elif field.field_type == 'checkbox' %}
+                        <div class="options">
+                            {% for option in field.options %}
+                                <label>
+                                    <input type="checkbox" name="field_{{ field.id }}" value="{{ option }}"
+                                           {% if option in existing_values|get_item:field.id|default:'' %}checked{% endif %}> 
+                                    {{ option }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
 
-        <br>
-        <button type="submit">Save Changes</button>
-    </form>
+            <button type="submit" class="btn-primary">💾 Save Changes</button>
+        </form>
 
-    <br>
-    <a href="{% url 'employee_list' %}?form={{ form.id }}">Back to Employee List</a>
+        <div class="back-link">
+            <a href="{% url 'employee_list' %}?form={{ form.id }}">⬅ Back to Employee List</a>
+        </div>
+    </div>
 </body>
 </html>

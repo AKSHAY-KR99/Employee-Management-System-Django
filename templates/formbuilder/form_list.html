@@ -1,22 +1,49 @@
+{% load static %}
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/formlist.css' %}">
+{% endblock %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Form List</title>
 </head>
-<body>
-    <h1>All Created Forms</h1>
-    <a href="{% url 'form_builder' %}">+ Create New Form</a>
-    <ul>
-        {% for form in forms %}
-            <li>
-                <a href="{% url 'form_detail' form.id %}">
-                    <strong>{{ form.name }}</strong>
-                </a> - {{ form.description }}
-                <em>(Created: {{ form.created_at|date:"Y-m-d H:i" }})</em>
-            </li>
-        {% empty %}
-            <li>No forms created yet.</li>
-        {% endfor %}
-    </ul>
+<body class="formlist-page">
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <h1>Welcome, {{ user.username }}</h1>
+        </div>
+        <div class="navbar-right">
+            <a href="/accounts/dashboard/" class="nav-btn">Dashboard</a>
+            <a href="/accounts/profile/" class="nav-btn">Profile</a>
+            <a href="/accounts/logout/" class="nav-btn logout">Logout</a>
+        </div>
+    </header>
+
+    <!-- Form List Container -->
+    <main class="formlist-container">
+        <div class="header-row">
+            <h2>All Created Forms</h2>
+            <a href="{% url 'form_builder' %}" class="btn create-btn">+ Create New Form</a>
+        </div>
+
+        <ul class="form-list">
+            {% for form in forms %}
+                <li class="form-item">
+                    <a href="{% url 'form_detail' form.id %}" class="form-title">
+                        <strong>{{ form.name }}</strong>
+                    </a>
+                    <p class="form-description">{{ form.description }}</p>
+                    <span class="form-date">
+                        Created: {{ form.created_at|date:"Y-m-d H:i" }}
+                    </span>
+                </li>
+            {% empty %}
+                <li class="no-forms">No forms created yet.</li>
+            {% endfor %}
+        </ul>
+    </main>
 </body>
 </html>
+

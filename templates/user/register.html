@@ -1,14 +1,30 @@
-<h2>Register</h2>
-<form id="registerForm" enctype="multipart/form-data">
-    <input type="text" name="username" placeholder="Username" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
-    <input type="text" name="phone" placeholder="Phone"><br>
-    <input type="file" name="profile_picture"><br>
-    <button type="submit">Register</button>
-</form>
-
-<div id="message"></div>
+{% load static %}
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static '/css/auth.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Details for Registration</title>
+</head>
+<body class="register-page">
+    <div class="auth-container">
+        <h2>Register</h2>
+        <form id="registerForm" class="auth-form" enctype="multipart/form-data">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="text" name="phone" placeholder="Phone">
+            <input type="file" name="profile_picture" class="file-input">
+            <button type="submit">Register</button>
+              <span style="font-size:13px;margin-top:100px;">Already have account? <a href="{% url 'login' %}">Sign In</a></span> <br>
+            <a href="{% url 'home_page' %}" style="font-size:13px;margin-top:100px;">Home</a>
+        </form>
+        <div id="message"></div>
+    </div>
+</body>
+</html>
 
 <script>
     document.getElementById("registerForm").addEventListener("submit", async function (e) {

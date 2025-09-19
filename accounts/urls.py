@@ -2,12 +2,13 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 from .views import register_user, login_user, dashboard_view, logout_user,change_password,\
     profile_view, form_builder, save_form, form_list, form_detail, create_employee_view, get_form_fields, \
-    save_employee, employee_list, delete_employee, edit_employee, UserRegisterAPI, UserLoginAPI, UserProfileAPI, \
+    save_employee, employee_list, delete_employee, edit_employee, home_page,UserRegisterAPI, UserLoginAPI, UserProfileAPI, \
     ChangePasswordAPI, UserUpdateAPI, DynamicFormDetailAPI, DynamicFormListAPI, DynamicFormCreateAPI, \
         EmployeeCreateAPIView, EmployeeListByFormAPIView, EmployeeUpdateAPIView, EmployeeDeleteAPIView
 
 
 urlpatterns = [
+    path('home/', home_page, name='home_page'),
     path("register/", register_user, name="register"),
     path("login/", login_user, name="login"),
     path("dashboard/", dashboard_view, name="dashboard"),

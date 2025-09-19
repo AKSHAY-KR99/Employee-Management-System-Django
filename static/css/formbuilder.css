@@ -1,0 +1,188 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3498db;
+    padding: 15px 30px;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar h1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.navbar-right .nav-btn {
+    margin-left: 15px;
+    padding: 8px 15px;
+    background: #2980b9;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.navbar-right .nav-btn:hover {
+    background: #1f6391;
+}
+
+.logout {
+    background: #e74c3c;
+}
+
+.logout:hover {
+    background: #c0392b;
+}
+
+/* Form Builder Container */
+.formbuilder-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.formbuilder-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.formbuilder-container h3 {
+    margin: 20px 0 10px;
+    color: #444;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Field Items */
+.fields-container {
+    margin-top: 15px;
+}
+
+.field-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 12px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    cursor: move;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.drag-handle {
+    background: #3498db;
+    color: #fff;
+    padding: 4px 8px;
+    margin-right: 10px;
+    border-radius: 4px;
+    cursor: grab;
+    font-size: 12px;
+}
+
+.field-item label {
+    font-size: 14px;
+    margin-top: 6px;
+    display: block;
+}
+
+.field-item input,
+.field-item select {
+    margin: 6px 0;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.field-item .remove-btn {
+    margin-top: 8px;
+    background: #e74c3c;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.field-item .remove-btn:hover {
+    background: #c0392b;
+}
+
+.drag-over {
+    border: 2px dashed #3498db;
+    background: #ecf6fd;
+}
+
+/* Buttons */
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-btn {
+    background: #2ecc71;
+    color: #fff;
+}
+
+.add-btn:hover {
+    background: #27ae60;
+}
+
+.save-btn {
+    background: #3498db;
+    color: #fff;
+}
+
+.save-btn:hover {
+    background: #2980b9;
+}

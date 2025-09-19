@@ -1,34 +1,49 @@
-<html>
+{% load static %}
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/employee.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Create Employee</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    .field-block { margin-bottom: 15px; }
-  </style>
 </head>
 <body>
-  <h1>Create Employee</h1>
+  <!-- Navbar -->
+  <header class="navbar">
+      <h2 class="logo">Employee Management</h2>
+      <nav>
+          <a href="/accounts/dashboard/">Dashboard</a>
+          <a href="/accounts/profile/">Profile</a>
+          <a href="/accounts/logout/">Logout</a>
+      </nav>
+  </header>
 
+  <div class="container">
+    <h1>Create Employee</h1>
 
+    <!-- Form Selection -->
+    <div class="form-select">
+      <label for="formSelect">Select Form:</label>
+      <select id="formSelect" onchange="loadFormFields()">
+          <option value="">-- Select a Form --</option>
+          {% for form in forms %}
+            <option value="{{ form.id }}">{{ form.name }}</option>
+          {% endfor %}
+      </select>
+    </div>
 
-  <label>Select Form:</label>
-  <select id="formSelect" onchange="loadFormFields()">
-      <option value="">-- Select a Form --</option>
-      {% for form in forms %}
-        <option value="{{ form.id }}">{{ form.name }}</option>
-      {% endfor %}
-  </select>
+    <hr>
 
-  <hr>
-
-
-
-  <form id="employeeForm" onsubmit="submitEmployee(event)">
-    <div id="dynamicFields"></div>
-    <button type="submit">Save Employee</button>
-  </form>
+    <!-- Employee Form -->
+    <form id="employeeForm" onsubmit="submitEmployee(event)">
+      <div id="dynamicFields"></div>
+      <button type="submit" class="btn-primary">Save Employee</button>
+    </form>
+  </div>
 
   <script>
+    {{ block.super }}
     async function loadFormFields() {
       const formId = document.getElementById("formSelect").value;
       if (!formId) return;    

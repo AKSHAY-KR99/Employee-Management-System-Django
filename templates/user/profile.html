@@ -1,65 +1,101 @@
-<h2>My Profile</h2>
+{% load static %}
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
 
-<form id="profileForm" enctype="multipart/form-data">
-  <label>Username:</label>
-  <input type="text" name="username" value="{{ user.username }}" disabled><br>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <h2 class="logo">Employee Management</h2>
+        <nav>
+            <a href="/accounts/dashboard/">Dashboard</a>
+            <a href="/accounts/profile/">Profile</a>
+            <a href="/accounts/logout/">Logout</a>
+        </nav>
+    </header>
 
-  <label>Email:</label>
-  <input type="email" name="email" value="{{ user.email }}" disabled><br>
+    <div class="container">
+        <h2 class="page-title">My Profile</h2>
 
-  <label>Phone:</label>
-  <input type="text" name="phone" value="{{ user.phone }}" disabled><br>
+        <form id="profileForm" enctype="multipart/form-data" class="profile-form">
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" name="username" value="{{ user.username }}" disabled>
+            </div>
 
-  <label>Profile Picture:</label><br>
-  {% if user.profile_picture %}
-    <img src="{{ user.profile_picture.url }}" width="100"><br>
-  {% else %}
-    <p>No profile picture uploaded.</p>
-  {% endif %}
-  <input type="file" name="profile_picture" disabled><br><br>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" name="email" value="{{ user.email }}" disabled>
+            </div>
 
-  <button type="button" id="editBtn">Edit</button>
-  <button type="submit" id="saveBtn" style="display:none;">Save</button>
-</form>
+            <div class="form-group">
+                <label>Phone:</label>
+                <input type="text" name="phone" value="{{ user.phone }}" disabled>
+            </div>
 
-<div id="message"></div>
+            <div class="form-group">
+                <label>Profile Picture:</label><br>
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" class="profile-pic">
+                {% else %}
+                    <p class="no-pic">No profile picture uploaded.</p>
+                {% endif %}
+                <input type="file" name="profile_picture" disabled>
+            </div>
 
-<br>
-<a href="/accounts/change-password/"><button>Change Password</button></a>
-<a href="/accounts/dashboard/"><button>Back to Dashboard</button></a>
+            <div class="form-actions">
+                <button type="button" id="editBtn" class="btn btn-secondary">✏️ Edit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary" style="display:none;">💾 Save</button>
+            </div>
+        </form>
 
-<script>
-const editBtn = document.getElementById("editBtn");
-const saveBtn = document.getElementById("saveBtn");
-const inputs = document.querySelectorAll("#profileForm input");
+        <div id="message" class="message-box"></div>
 
-editBtn.addEventListener("click", () => {
-    inputs.forEach(input => input.disabled = false);
-    editBtn.style.display = "none";
-    saveBtn.style.display = "inline";
-});
+        <div class="extra-links">
+            <a href="/accounts/change-password/" class="btn btn-warning">🔑 Change Password</a>
+            <a href="/accounts/dashboard/" class="btn btn-light">⬅ Back to Dashboard</a>
+        </div>
+    </div>
 
-document.getElementById("profileForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+    <script>
+    const editBtn = document.getElementById("editBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const inputs = document.querySelectorAll("#profileForm input");
 
-    const formData = new FormData(this);
-
-    let response = await fetch("/accounts/profile/", {
-        method: "POST",
-        body: formData,
-        credentials: "include"
+    editBtn.addEventListener("click", () => {
+        inputs.forEach(input => input.disabled = false);
+        editBtn.style.display = "none";
+        saveBtn.style.display = "inline";
     });
 
-    let result = await response.json();
+    document.getElementById("profileForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
 
-    if (result.success) {
-        document.getElementById("message").innerHTML = `<span style="color:green">${result.message}</span>`;
-        // disable inputs again
-        inputs.forEach(input => input.disabled = true);
-        saveBtn.style.display = "none";
-        editBtn.style.display = "inline";
-    } else {
-        document.getElementById("message").innerHTML = `<span style="color:red">${result.error}</span>`;
-    }
-});
-</script>
+        const formData = new FormData(this);
+
+        let response = await fetch("/accounts/profile/", {
+            method: "POST",
+            body: formData,
+            credentials: "include"
+        });
+
+        let result = await response.json();
+
+        if (result.success) {
+            document.getElementById("message").innerHTML = `<span class="success-msg">${result.message}</span>`;
+            inputs.forEach(input => input.disabled = true);
+            saveBtn.style.display = "none";
+            editBtn.style.display = "inline";
+        } else {
+            document.getElementById("message").innerHTML = `<span class="error-msg">${result.error}</span>`;
+        }
+    });
+    </script>
+</body>
+</html>

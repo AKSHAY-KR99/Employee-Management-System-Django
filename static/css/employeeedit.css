@@ -1,0 +1,119 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background: #2c3e50;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+.navbar nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.navbar nav a:hover {
+  color: #1abc9c;
+}
+
+/* Container */
+.container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Heading */
+.container h1 {
+  margin-bottom: 25px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Form */
+.edit-form .form-group {
+  margin-bottom: 20px;
+}
+.edit-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #34495e;
+}
+.edit-form input,
+.edit-form select,
+.edit-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.edit-form input:focus,
+.edit-form select:focus,
+.edit-form textarea:focus {
+  border-color: #3498db;
+}
+
+/* Options (radio/checkbox) */
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 8px;
+}
+.options label {
+  font-weight: normal;
+  color: #2c3e50;
+}
+
+/* Button */
+.btn-primary {
+  background: #3498db;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s, transform 0.2s;
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+.btn-primary:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Back link */
+.back-link {
+  margin-top: 20px;
+  text-align: center;
+}
+.back-link a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 500;
+}
+.back-link a:hover {
+  text-decoration: underline;
+}

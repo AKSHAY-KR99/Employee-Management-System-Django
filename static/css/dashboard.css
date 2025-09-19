@@ -1,0 +1,96 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3498db;
+    padding: 15px 30px;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar h1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.navbar-right .nav-btn {
+    margin-left: 15px;
+    padding: 8px 15px;
+    background: #2980b9;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.navbar-right .nav-btn:hover {
+    background: #1f6391;
+}
+
+.logout {
+    background: #e74c3c;
+}
+
+.logout:hover {
+    background: #c0392b;
+}
+
+/* User Info */
+.user-info {
+    margin: 30px auto;
+    text-align: center;
+}
+
+.user-info p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    margin-top: 10px;
+    border: 3px solid #3498db;
+}
+
+/* Dashboard Options */
+.dashboard-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.option-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+}
+
+.option-card:hover {
+    background: #ecf6fd;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}

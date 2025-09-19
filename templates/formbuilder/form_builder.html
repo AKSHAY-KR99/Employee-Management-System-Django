@@ -1,63 +1,48 @@
-<!DOCTYPE html>
-<html>
+{% load static %}
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/formbuilder.css' %}">
+{% endblock %}
+<!DOCTYPE html> 
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Form Builder</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        .field-item {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 8px;
-            background: #f9f9f9;
-            cursor: move;
-        }
-
-        .drag-over {
-            border: 2px dashed #007bff;
-            background: #e9f5ff;
-        }
-
-        .field-item input,
-        .field-item select {
-            margin: 4px 0;
-        }
-
-        .remove-btn {
-            background: red;
-            color: white;
-            padding: 2px 6px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .drag-handle {
-            background: #007bff;
-            color: white;
-            padding: 2px 6px;
-            margin-right: 10px;
-            cursor: grab;
-            font-size: 12px;
-        }
-    </style>
 </head>
-<body>
-    <h1>Create a Dynamic Form</h1>
+<body class="formbuilder-page">
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <h1>Welcome, {{ user.username }}</h1>
+        </div>
+        <div class="navbar-right">
+            <a href="/accounts/dashboard/" class="nav-btn">Dashboard</a>
+            <a href="/accounts/profile/" class="nav-btn">Profile</a>
+            <a href="/accounts/logout/" class="nav-btn logout">Logout</a>
+        </div>
+    </header>
 
-    <label>Form Name:</label>
-    <input type="text" id="form_name"><br><br>
+    <!-- Form Builder Container -->
+    <main class="formbuilder-container">
+        <h2>Create a Dynamic Form</h2>
 
-    <label>Description:</label>
-    <textarea id="form_description"></textarea><br><br>
+        <div class="form-group">
+            <label>Form Name:</label>
+            <input type="text" id="form_name" placeholder="Enter form name">
+        </div>
 
-    <h3>Form Fields</h3>
-    <div id="fields-container"></div>
+        <div class="form-group">
+            <label>Description:</label>
+            <textarea id="form_description" placeholder="Enter description"></textarea>
+        </div>
 
-    <button onclick="addField()">+ Add Field</button><br><br>
-    <button onclick="saveForm()">Save Form</button>
+        <h3>Form Fields</h3>
+        <div id="fields-container" class="fields-container"></div>
+
+        <div class="button-group">
+            <button type="button" class="btn add-btn" onclick="addField()">+ Add Field</button>
+            <button type="button" class="btn save-btn" onclick="saveForm()">Save Form</button>
+        </div>
+    </main>
 
     <script>
         let fieldCount = 0;

@@ -1,0 +1,93 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Background (default gradient) */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5); /* default (login) */
+}
+
+/* Container */
+.auth-container {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+}
+
+/* Heading */
+.auth-container h2 {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* Form */
+.auth-form input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.auth-form input:focus {
+    border-color: var(--accent-color);
+}
+
+/* File Input */
+.auth-form .file-input {
+    border: none;
+    padding: 5px;
+}
+
+/* Button */
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: var(--accent-color);
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.auth-form button:hover {
+    filter: brightness(90%);
+    transform: translateY(-2px);
+}
+
+/* Message Box */
+#message {
+    margin-top: 15px;
+    font-size: 14px;
+    color: red;
+}
+
+/* --------- Variants --------- */
+
+/* Login Theme */
+.login-page {
+    --accent-color: #3498db;
+    background: linear-gradient(135deg, #3dbae7, #104366);
+}
+
+/* Register Theme */
+.register-page {
+    --accent-color: #e67e22;
+    background: linear-gradient(135deg, #3dbae7, #104366);
+}

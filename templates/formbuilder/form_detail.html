@@ -1,30 +1,59 @@
+{% load static %}
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/formdetail.css' %}">
+{% endblock %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>{{ form.name }}</title>
 </head>
 <body>
-    <h1>{{ form.name }}</h1>
-    <p>{{ form.description }}</p>
+    <!-- Navbar -->
+    <header class="navbar">
+        <h2 class="logo">Welcome, {{ user.username }}</h2>
+        <nav>
+            <a href="/accounts/dashboard/">Dashboard</a>
+            <a href="/accounts/profile/">Profile</a>
+            <a href="/accounts/logout/">Logout</a>
+        </nav>
+    </header>
 
-    <h3>Fields</h3>
-    <ul>
-        {% for field in fields %}
-            <li>
-                <strong>{{ field.label }}</strong> 
-                ({{ field.get_field_type_display }})
-                {% if field.required %} *{% endif %}
-                {% if field.placeholder %}<br>Placeholder: {{ field.placeholder }}{% endif %}
-                {% if field.help_text %}<br>Help: {{ field.help_text }}{% endif %}
-                {% if field.options %}
-                    <br>Options: {{ field.options|join:", " }}
-                {% endif %}
-            </li>
-        {% empty %}
-            <li>No fields added yet.</li>
-        {% endfor %}
-    </ul>
+    <!-- Container -->
+    <div class="container">
+        <div class="form-header">
+            <h1>{{ form.name }}</h1>
+            <p class="description">{{ form.description }}</p>
+        </div>
 
-    <p><a href="{% url 'form_list' %}">⬅ Back to Form List</a></p>
+        <div class="form-fields">
+            <h3>Form Fields</h3>
+            <ul>
+                {% for field in fields %}
+                    <li class="field-card">
+                        <strong>{{ field.label }}</strong> 
+                        <span class="type">({{ field.get_field_type_display }})</span>
+                        {% if field.required %}<span class="required"> *Required</span>{% endif %}
+                        
+                        {% if field.placeholder %}
+                            <div class="meta"><strong>Placeholder:</strong> {{ field.placeholder }}</div>
+                        {% endif %}
+                        {% if field.help_text %}
+                            <div class="meta"><strong>Help:</strong> {{ field.help_text }}</div>
+                        {% endif %}
+                        {% if field.options %}
+                            <div class="meta"><strong>Options:</strong> {{ field.options|join:", " }}</div>
+                        {% endif %}
+                    </li>
+                {% empty %}
+                    <li class="empty">No fields added yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="back-btn">
+            <a href="{% url 'form_list' %}">⬅ Back to Form List</a>
+        </div>
+    </div>
 </body>
 </html>

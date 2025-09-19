@@ -1,0 +1,154 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background: #2c3e50;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+.navbar nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.navbar nav a:hover {
+  color: #1abc9c;
+}
+
+/* Container */
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Title */
+.page-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
+/* Form */
+.profile-form .form-group {
+  margin-bottom: 20px;
+}
+.profile-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #34495e;
+}
+.profile-form input[type="text"],
+.profile-form input[type="email"],
+.profile-form input[type="file"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+.profile-form input:disabled {
+  background: #f7f7f7;
+  cursor: not-allowed;
+}
+
+/* Profile picture */
+.profile-pic {
+  display: block;
+  margin-bottom: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.no-pic {
+  color: #999;
+  font-style: italic;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn-primary {
+  background: #3498db;
+  color: white;
+}
+.btn-primary:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: #2ecc71;
+  color: white;
+}
+.btn-secondary:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+}
+.btn-warning {
+  background: #f39c12;
+  color: white;
+}
+.btn-warning:hover {
+  background: #d35400;
+}
+.btn-light {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+.btn-light:hover {
+  background: #bdc3c7;
+}
+
+/* Actions */
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* Message */
+.message-box {
+  margin-top: 15px;
+  text-align: center;
+}
+.success-msg {
+  color: green;
+  font-weight: bold;
+}
+.error-msg {
+  color: red;
+  font-weight: bold;
+}
+
+/* Extra links */
+.extra-links {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}

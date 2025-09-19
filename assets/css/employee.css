@@ -1,0 +1,120 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background: #2c3e50;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+.navbar nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.navbar nav a:hover {
+  color: #1abc9c;
+}
+
+/* Page Container */
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+.container h1 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* Form Select */
+.form-select {
+  margin-bottom: 20px;
+}
+.form-select label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.form-select select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.form-select select:focus {
+  border-color: #3498db;
+}
+
+/* Fields */
+.field-block {
+  margin-bottom: 20px;
+}
+.field-block label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+.field-block input,
+.field-block textarea,
+.field-block select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.field-block input:focus,
+.field-block textarea:focus,
+.field-block select:focus {
+  border-color: #3498db;
+}
+.field-block small {
+  display: block;
+  margin-top: 5px;
+  color: #7f8c8d;
+  font-size: 13px;
+}
+
+/* Radio & Checkbox Group */
+.field-block label input[type="radio"],
+.field-block label input[type="checkbox"] {
+  margin-right: 8px;
+  transform: translateY(1px);
+}
+
+/* Button */
+.btn-primary {
+  background: #3498db;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn-primary:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}

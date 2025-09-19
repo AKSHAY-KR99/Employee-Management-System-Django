@@ -1,117 +1,103 @@
+{% load static %}
 {% load custom_filters %}
-
+{% block cssfiles %}
+    <link rel="stylesheet" href="{% static 'css/employeelist.css' %}">
+{% endblock %}
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Employee List</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background: #f2f2f2;
-        }
-        .filter-box {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            background: #fafafa;
-        }
-    </style>
+
 </head>
-
 <body>
-    <h1>Employee List</h1>
+    <!-- Navbar -->
+    <header class="navbar">
+        <h2 class="logo">Employee Management</h2>
+        <nav>
+            <a href="/accounts/dashboard/">Dashboard</a>
+            <a href="/accounts/profile/">Profile</a>
+            <a href="/accounts/logout/">Logout</a>
+        </nav>
+    </header>
 
-    
-<form method="get">
-        <label>Select Form:</label>
-        <select name="form" onchange="this.form.submit()">
-            <option value="">-- All Forms --</option>
-            {% for form in forms %}
-                <option value="{{ form.id }}" 
-                    {% if selected_form and form.id|is_equal:selected_form.id %}selected{% endif %}>
-                    {{ form.name }}
-                </option>
-            {% endfor %}
-        </select>
-    </form>
+    <div class="container">
+        <h1>Employee List</h1>
 
-
-   
-    {% if selected_form %}
-    <div class="filter-box">
-        <form method="get">
-            <input type="hidden" name="form" value="{{ selected_form.id }}">
-            <h3>Filter by Fields</h3>
-
-            {% for field in selected_form.fields.all %}
-            <label>{{ field.label }}:</label>
-            <input type="text" name="field_{{ field.id }}"
-                value="{{ request.GET|get_item:'field_'|add:field.id|stringformat:'s' }}">
-            <br>
-            {% endfor %}
-
-            <br>
-            <button type="submit">Apply Filters</button>
+        <!-- Form Selector -->
+        <form method="get" class="form-selector">
+            <label>Select Form:</label>
+            <select name="form" onchange="this.form.submit()">
+                <option value="">-- All Forms --</option>
+                {% for form in forms %}
+                    <option value="{{ form.id }}" 
+                        {% if selected_form and form.id|is_equal:selected_form.id %}selected{% endif %}>
+                        {{ form.name }}
+                    </option>
+                {% endfor %}
+            </select>
         </form>
+
+        <!-- Filters -->
+        {% if selected_form %}
+        <div class="filter-box">
+            <form method="get">
+                <input type="hidden" name="form" value="{{ selected_form.id }}">
+                <h3>Filter by Fields</h3>
+
+                <div class="filter-fields">
+                    {% for field in selected_form.fields.all %}
+                    <div class="filter-item">
+                        <label>{{ field.label }}:</label>
+                        <input type="text" name="field_{{ field.id }}"
+                            value="{{ request.GET|get_item:'field_'|add:field.id|stringformat:'s' }}">
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn-primary">Apply Filters</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <!-- Employee Table -->
+        {% if selected_form %}
+        <h2>{{ selected_form.name }}</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        {% for field in selected_form.fields.all %}
+                        <th>{{ field.label }}</th>
+                        {% endfor %}
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                    <tr>
+                        {% for field in selected_form.fields.all %}
+                        {% with value=employee.field_values.all|get_field_value:field.id %}
+                        <td>{{ value }}</td>
+                        {% endwith %}
+                        {% endfor %}
+                        <td class="actions"> 
+                            <a href="{% url 'edit_employee' employee.id %}?form={{ selected_form.id }}" class="edit-link">Edit</a>
+                            <a href="{% url 'delete_employee' employee.id %}?form={{ selected_form.id }}" 
+                               onclick="return confirm('Are you sure you want to delete this employee?');" 
+                               class="delete-link">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="{{ selected_form.fields.count|add:1 }}" class="empty">No employees found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
-
-
-
-
-   
-    {% if selected_form %}
-    <h2>{{ selected_form.name }}</h2>
-
-    <table>
-        <thead>
-            <tr>
-                {% for field in selected_form.fields.all %}
-                <th>{{ field.label }}</th>
-                {% endfor %}
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for employee in employees %}
-            <tr>
-                {% for field in selected_form.fields.all %}
-                {% with value=employee.field_values.all|get_field_value:field.id %}
-                <td>{{ value }}</td>
-                {% endwith %}
-                {% endfor %}
-                <td> 
-                    <a href="{% url 'edit_employee' employee.id %}?form={{ selected_form.id }}">Edit | </a>
-                     <a href="{% url 'delete_employee' employee.id %}?form={{ selected_form.id }}" 
-                               onclick="return confirm('Are you sure you want to delete this employee?');">
-                               Delete
-                            </a></td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="{{ selected_form.fields.count }}">No employees found.</td>
-                <td></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% endif %}
-
 </body>
-
 </html>

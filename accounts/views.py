@@ -12,6 +12,8 @@ from .models import DynamicForm, DynamicField, Employee, EmployeeFieldValue
 
 User = get_user_model()
 
+def home_page(request):
+    return render(request, 'home.html')
 
 @csrf_exempt
 def register_user(request):
@@ -320,8 +322,8 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserDetailSerializer, ChangePasswordSerializer, \
-    LogoutSerializer, UserUpdateSerializer, DynamicFormSerializer, EmployeeCreateSerializer, EmployeeReadSerializer, EmployeeUpdateSerializer
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserDetailSerializer, ChangePasswordSerializer,\
+    UserUpdateSerializer, DynamicFormSerializer, EmployeeCreateSerializer, EmployeeReadSerializer, EmployeeUpdateSerializer
 
 
 class UserRegisterAPI(APIView):
