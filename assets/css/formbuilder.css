@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #3498db;
+    background: rgb(20, 121, 0);
     padding: 15px 30px;
     color: #fff;
     position: sticky;
@@ -27,24 +27,18 @@
 .navbar-right .nav-btn {
     margin-left: 15px;
     padding: 8px 15px;
-    background: #2980b9;
     color: #fff;
+    font-size: 14px;
+    font-weight: 600;
     text-decoration: none;
     border-radius: 6px;
     transition: background 0.3s;
 }
 
 .navbar-right .nav-btn:hover {
-    background: #1f6391;
+    background: rgb(28, 168, 0);
 }
 
-.logout {
-    background: #e74c3c;
-}
-
-.logout:hover {
-    background: #c0392b;
-}
 
 /* Form Builder Container */
 .formbuilder-container {
@@ -185,4 +179,70 @@
 
 .save-btn:hover {
     background: #2980b9;
+}
+
+
+/* Additional Animations */
+
+/* Navbar fade-down */
+.navbar {
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: navbarFade 0.8s ease forwards;
+}
+
+@keyframes navbarFade {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Container fade-up */
+.formbuilder-container {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: containerFade 1s ease forwards 0.3s;
+}
+
+@keyframes containerFade {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Field item pop-in */
+.field-item {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fieldPop 0.5s ease forwards;
+}
+
+@keyframes fieldPop {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Buttons hover animation */
+.btn, .field-item .remove-btn {
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover, .field-item .remove-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(20, 121, 0, 0.3);
+}
+
+/* Dragging effect */
+.field-item.dragging {
+    opacity: 0.6;
+    transform: scale(0.98);
+    box-shadow: 0 10px 20px rgba(20, 121, 0, 0.2);
+}
+
+/* Drag-over highlight */
+.drag-over {
+    animation: dragOverAnim 0.3s ease forwards;
+}
+
+@keyframes dragOverAnim {
+    0% { background: #ecf6fd; border-color: #3498db; }
+    100% { background: #d6f0fa; border-color: #3498db; }
 }

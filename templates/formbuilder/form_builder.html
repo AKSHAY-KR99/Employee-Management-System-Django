@@ -2,28 +2,29 @@
 {% block cssfiles %}
 <link rel="stylesheet" href="{% static 'css/formbuilder.css' %}">
 {% endblock %}
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Form Builder</title>
 </head>
 <body class="formbuilder-page">
+
     <!-- Navbar -->
     <header class="navbar">
         <div class="navbar-left">
-            <h1>Welcome, {{ user.username }}</h1>
+            <h2>Hi, {{ user.username }}</h2>
         </div>
-        <div class="navbar-right">
+        <nav class="navbar-right">
             <a href="/accounts/dashboard/" class="nav-btn">Dashboard</a>
             <a href="/accounts/profile/" class="nav-btn">Profile</a>
             <a href="/accounts/logout/" class="nav-btn logout">Logout</a>
-        </div>
+        </nav>
     </header>
 
     <!-- Form Builder Container -->
     <main class="formbuilder-container">
-        <h2>Create a Dynamic Form</h2>
+        <h2 class="page-title">Create a Dynamic Form</h2>
 
         <div class="form-group">
             <label>Form Name:</label>

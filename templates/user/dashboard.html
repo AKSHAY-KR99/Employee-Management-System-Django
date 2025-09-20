@@ -21,24 +21,28 @@
         </div>
     </header>
 
-    <!-- User Info -->
+    <!-- User Info Section -->
     <section class="user-info">
-        <p>Email: {{ user.email }}</p>
+        <h2>Your Details</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
         {% if user.phone %}
-            <p>Phone: {{ user.phone }}</p>
+            <p><strong>Phone:</strong> {{ user.phone }}</p>
         {% endif %}
 
         {% if user.profile_picture %}
-            <p><img src="{{ user.profile_picture.url }}" width="120" class="profile-pic"></p>
+            <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="profile-pic">
         {% endif %}
     </section>
 
     <!-- Dashboard Options -->
     <main class="dashboard-options">
-        <a href="{% url 'form_builder' %}" class="option-card">Create New Form</a>
-        <a href="{% url 'form_list' %}" class="option-card">List All Forms</a>
-        <a href="{% url 'create_employee' %}" class="option-card">Add Employees</a>
-        <a href="{% url 'employee_list' %}" class="option-card">List Employees</a>
+        <a href="{% url 'form_builder' %}" class="option-card">📄 Create New Form</a>
+        <a href="{% url 'form_list' %}" class="option-card">📑 List All Forms</a>
+        <a href="{% url 'create_employee' %}" class="option-card">👤 Add Employees</a>
+        <a href="{% url 'employee_list' %}" class="option-card">👥 List Employees</a>
     </main>
+        <section class="hero-image">
+        <img src="{% static 'images/emp.png' %}" alt="Office Environment">
+    </section>
 </body>
 </html>

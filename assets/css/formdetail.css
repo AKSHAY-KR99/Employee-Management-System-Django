@@ -8,7 +8,7 @@
 
 /* Navbar */
 .navbar {
-    background: #2c3e50;
+    background: rgb(20, 121, 0);
     color: white;
     padding: 15px 30px;
     display: flex;
@@ -20,14 +20,17 @@
     font-weight: bold;
 }
 .navbar nav a {
-    color: white;
-    margin-left: 20px;
+    margin-left: 15px;
+    padding: 8px 15px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
+    border-radius: 6px;
+    transition: background 0.3s;
 }
 .navbar nav a:hover {
-    color: #1abc9c;
+  background: rgb(28, 168, 0);
 }
 
 /* Container */
@@ -108,4 +111,53 @@
 }
 .back-btn a:hover {
     background: #2980b9;
+}
+
+
+/* Additional Animations */
+
+/* Navbar fade-down */
+.navbar {
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: navbarFade 0.8s ease forwards;
+}
+
+@keyframes navbarFade {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Container fade-up */
+.container {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: containerFade 1s ease forwards 0.3s;
+}
+
+@keyframes containerFade {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Field Card pop-in */
+.field-card {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fieldPop 0.5s ease forwards;
+}
+
+@keyframes fieldPop {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Back button hover animation */
+.back-btn a {
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-btn a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(20, 121, 0, 0.3);
 }

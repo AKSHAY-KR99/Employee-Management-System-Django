@@ -8,7 +8,7 @@
 
 /* Navbar */
 .navbar {
-  background: #2c3e50;
+  background: rgb(20, 121, 0);
   color: white;
   padding: 15px 30px;
   display: flex;
@@ -19,15 +19,19 @@
   font-size: 20px;
   font-weight: bold;
 }
+
 .navbar nav a {
-  color: white;
-  margin-left: 20px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
+    margin-left: 15px;
+    padding: 8px 15px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s;
 }
 .navbar nav a:hover {
-  color: #1abc9c;
+  background: rgb(28, 168, 0);
 }
 
 /* Container */
@@ -116,4 +120,71 @@
 }
 .back-link a:hover {
   text-decoration: underline;
+}
+
+
+/* Navbar Fade-down */
+.navbar {
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: navbarFade 1s ease forwards;
+}
+
+@keyframes navbarFade {
+    0% { opacity: 0; transform: translateY(-50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Container Fade-up */
+.container {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: containerFade 1s ease forwards 0.3s;
+}
+
+@keyframes containerFade {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Heading Fade-up */
+.container h1 {
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: headingFade 1s ease forwards 0.5s;
+}
+
+@keyframes headingFade {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Form Elements Focus Animation */
+.edit-form input:focus,
+.edit-form select:focus,
+.edit-form textarea:focus {
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    box-shadow: 0 0 6px rgba(20, 121, 0, 0.4);
+    transform: scale(1.02);
+}
+
+/* Button Hover Animation */
+.btn-primary {
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(20, 121, 0, 0.4);
+}
+
+/* Back-link Fade-in */
+.back-link {
+    opacity: 0;
+    animation: backLinkFade 1s ease forwards 0.7s;
+}
+
+@keyframes backLinkFade {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
 }

@@ -1,154 +1,190 @@
-/* Reset */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Navbar */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5fdf7;
+    color: #0e3000;
+    min-height: 100vh;
+}
+
+/* ✅ Navbar */
 .navbar {
-  background: #2c3e50;
-  color: white;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.navbar .logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-.navbar nav a {
-  color: white;
-  margin-left: 20px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-.navbar nav a:hover {
-  color: #1abc9c;
+    width: 100%;
+    background: rgb(20, 121, 0);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-/* Container */
+.navbar-left h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-btn {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: white;
+    color: rgb(20, 121, 0);
+}
+
+.logout {
+    background: white;
+    color: rgb(20, 121, 0);
+    font-weight: 600;
+}
+
+.logout:hover {
+    background: rgb(32, 194, 0);
+    color: white;
+}
+
+/* ✅ Profile Container */
 .container {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 25px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: 80%;
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    animation: fadeInUp 1s ease;
 }
 
-/* Title */
 .page-title {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+    color: rgb(20, 121, 0);
 }
 
-/* Form */
+/* ✅ Form Styling */
 .profile-form .form-group {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
+
 .profile-form label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #34495e;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+    color: #0e3000;
 }
+
 .profile-form input[type="text"],
 .profile-form input[type="email"],
 .profile-form input[type="file"] {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  outline: none;
-}
-.profile-form input:disabled {
-  background: #f7f7f7;
-  cursor: not-allowed;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border 0.3s ease;
 }
 
-/* Profile picture */
+.profile-form input:focus {
+    border-color: rgb(20, 121, 0);
+    outline: none;
+}
+
+/* ✅ Profile Picture */
 .profile-pic {
-  display: block;
-  margin-bottom: 10px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
+    margin-top: 10px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid rgb(20, 121, 0);
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
+
+.profile-pic:hover {
+    transform: scale(1.05);
+}
+
 .no-pic {
-  color: #999;
-  font-style: italic;
+    color: gray;
+    font-size: 13px;
 }
 
-/* Buttons */
+/* ✅ Buttons */
 .btn {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
 }
+
 .btn-primary {
-  background: #3498db;
-  color: white;
+    background: rgb(20, 121, 0);
+    color: white;
 }
-.btn-primary:hover {
-  background: #2980b9;
-  transform: translateY(-2px);
-}
+
 .btn-secondary {
-  background: #2ecc71;
-  color: white;
+    background: #eee;
+    color: #0e3000;
 }
-.btn-secondary:hover {
-  background: #27ae60;
-  transform: translateY(-2px);
-}
+
 .btn-warning {
-  background: #f39c12;
-  color: white;
+    background: rgb(32, 194, 0);
+    color: white;
 }
-.btn-warning:hover {
-  background: #d35400;
-}
+
 .btn-light {
-  background: #ecf0f1;
-  color: #2c3e50;
-}
-.btn-light:hover {
-  background: #bdc3c7;
+    background: #ddd;
+    color: #0e3000;
 }
 
-/* Actions */
-.form-actions {
-  display: flex;
-  gap: 15px;
-  margin-top: 10px;
+.btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
 }
 
-/* Message */
+/* ✅ Message */
 .message-box {
-  margin-top: 15px;
-  text-align: center;
-}
-.success-msg {
-  color: green;
-  font-weight: bold;
-}
-.error-msg {
-  color: red;
-  font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
 }
 
-/* Extra links */
-.extra-links {
-  margin-top: 25px;
-  display: flex;
-  justify-content: space-between;
+.success-msg {
+    color: green;
+    font-weight: 600;
+}
+
+.error-msg {
+    color: red;
+    font-weight: 600;
+}
+
+/* ✅ Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }

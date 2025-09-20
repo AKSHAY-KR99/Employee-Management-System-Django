@@ -18,9 +18,11 @@
             <input type="text" name="phone" placeholder="Phone">
             <input type="file" name="profile_picture" class="file-input">
             <button type="submit">Register</button>
-              <span style="font-size:13px;margin-top:100px;">Already have account? <a href="{% url 'login' %}">Sign In</a></span> <br>
-            <a href="{% url 'home_page' %}" style="font-size:13px;margin-top:100px;">Home</a>
         </form>
+        <div class="extra">
+            <span style="font-size:13px;margin-top:100px;">Already have account? <a href="{% url 'login' %}">Sign In</a></span> <br>
+            <a href="{% url 'home_page' %}" style="font-size:13px;margin-top:100px;">Home</a>
+        </div>
         <div id="message"></div>
     </div>
 </body>

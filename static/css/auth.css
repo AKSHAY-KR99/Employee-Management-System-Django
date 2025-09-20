@@ -1,93 +1,116 @@
-/* Reset */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
-/* Background (default gradient) */
 body {
-    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom right, rgb(32, 194, 0), rgb(20, 121, 0));
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #74ebd5, #ACB6E5); /* default (login) */
+    color: #0e3000;
 }
 
-/* Container */
+/* ✅ Auth container */
 .auth-container {
     background: #fff;
     padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    width: 350px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
     text-align: center;
+    animation: fadeIn 1s ease forwards;
 }
 
-/* Heading */
+.extra{
+    padding-top: 10px;
+}
+
 .auth-container h2 {
-    margin-bottom: 25px;
-    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: rgb(20, 121, 0);
 }
 
-/* Form */
+/* ✅ Input fields */
 .auth-form input {
     width: 100%;
     padding: 12px 15px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(20, 121, 0);
     border-radius: 8px;
+    font-size: 14px;
     outline: none;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .auth-form input:focus {
-    border-color: var(--accent-color);
+    border-color: rgb(32, 194, 0);
+    box-shadow: 0 0 8px rgba(32, 194, 0, 0.3);
 }
 
-/* File Input */
-.auth-form .file-input {
+/* ✅ File input (styled) */
+.file-input {
     border: none;
-    padding: 5px;
+    background: #f9f9f9;
+    padding: 8px;
+    font-size: 13px;
 }
 
-/* Button */
+/* ✅ Buttons */
 .auth-form button {
     width: 100%;
     padding: 12px;
     margin-top: 15px;
-    background: var(--accent-color);
-    color: #fff;
-    font-size: 16px;
+    background: rgb(20, 121, 0);
     border: none;
     border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
+    transition: all 0.3s ease;
 }
 
 .auth-form button:hover {
-    filter: brightness(90%);
+    background: rgb(32, 194, 0);
     transform: translateY(-2px);
 }
 
-/* Message Box */
+/* ✅ Links */
+.auth-form a {
+    color: rgb(20, 121, 0);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.auth-form a:hover {
+    color: rgb(32, 194, 0);
+    text-decoration: underline;
+}
+
+.auth-form span {
+    display: block;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+/* ✅ Message box */
 #message {
     margin-top: 15px;
     font-size: 14px;
-    color: red;
 }
 
-/* --------- Variants --------- */
-
-/* Login Theme */
-.login-page {
-    --accent-color: #3498db;
-    background: linear-gradient(135deg, #3dbae7, #104366);
-}
-
-/* Register Theme */
-.register-page {
-    --accent-color: #e67e22;
-    background: linear-gradient(135deg, #3dbae7, #104366);
+/* ✅ Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
 }

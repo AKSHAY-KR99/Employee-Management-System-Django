@@ -7,17 +7,18 @@
 <head>
     <meta charset="UTF-8">
     <title>My Profile</title>
-
 </head>
 <body>
     <!-- Navbar -->
     <header class="navbar">
-        <h2 class="logo">Employee Management</h2>
-        <nav>
-            <a href="/accounts/dashboard/">Dashboard</a>
-            <a href="/accounts/profile/">Profile</a>
-            <a href="/accounts/logout/">Logout</a>
-        </nav>
+        <div class="navbar-left">
+            <h2>Hi, {{ user.username }}</h2>
+        </div>
+        <div class="navbar-right">
+            <a href="/accounts/dashboard/" class="nav-btn">Dashboard</a>
+            <a href="/accounts/profile/" class="nav-btn">Profile</a>
+            <a href="/accounts/logout/" class="nav-btn logout">Logout</a>
+        </div>
     </header>
 
     <div class="container">
